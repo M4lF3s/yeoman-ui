@@ -145,15 +145,16 @@
 		"@vscode-logging/logger": "1.1.0",
 		"chalk": "^4.0.0",
 		"datauri": "^2.0.0",
+		"express": "^4.17.1",
 		"fs-extra": "^8.1.0",
 		"humanize-string": "^1.0.2",
 		"lodash": "^4.17.16",
+		"npm-registry-fetch": "8.1.1",
 		"object-hash": "^2.0.3",
 		"strip-ansi": "^6.0.0",
 		"titleize": "^1.0.1",
 		"ws": "^7.2.5",
-		"yeoman-environment": "2.8.0",
-		"npm-registry-fetch": "8.1.1"
+		"yeoman-environment": "2.8.0"
 	},
 	"devDependencies": {
 		"@types/npm-registry-fetch": "8.0.0",
