@@ -4,6 +4,7 @@ import * as sinon from "sinon";
 import * as _ from "lodash";
 import * as vscode from "vscode";
 import { GeneratorFilter } from '../src/filter';
+import * as messages from '../src/messages';
 
 import { VSCodeYouiEvents } from "../src/vscode-youi-events";
 
@@ -36,7 +37,7 @@ describe('vscode-youi-events unit test', () => {
 
     beforeEach(() => {
         const webViewPanel: any = {dispose: () => true};
-        events = new VSCodeYouiEvents(undefined, webViewPanel, GeneratorFilter.create(), {});
+        events = new VSCodeYouiEvents(undefined, webViewPanel, GeneratorFilter.create(), messages.default);
         windowMock = sandbox.mock(vscode.window);
         commandsMock = sandbox.mock(vscode.commands);
         workspaceMock = sandbox.mock(vscode.workspace);
@@ -108,7 +109,7 @@ describe('vscode-youi-events unit test', () => {
 
         it("generator filter type is module", () => {
             const genFilter = GeneratorFilter.create({type: ["module"]});
-            const testEvents = new VSCodeYouiEvents(undefined, undefined, genFilter, {});
+            const testEvents = new VSCodeYouiEvents(undefined, undefined, genFilter, messages.default);
             eventsMock = sandbox.mock(testEvents);
             eventsMock.expects("doClose");
             windowMock.expects("showInformationMessage").withExactArgs('The project has been generated.').resolves();
