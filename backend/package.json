@@ -135,7 +135,9 @@
 		"test": "nyc mocha -p tsconfig.json --opts ./mocha.opts",
 		"ws:run": "node ./out/src/webSocketServer/index.js",
 		"ws:egRun": "node ./out/src/webSocketServer/exploreGensIndex.js",
-		"lint": "tslint '*/*.{ts,tsx}' -c ./tslint.yml"
+		"lint": "tslint '*/*.{ts,tsx}' -c ./tslint.yml",
+		"build": "npm run webpack-prod",
+		"start": "npm run ws:run"
 	},
 	"dependencies": {
 		"@sap-devx/webview-rpc": "^0.2.2",
