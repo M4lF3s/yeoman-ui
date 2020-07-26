@@ -9,6 +9,13 @@ import { IChildLogger } from "@vscode-logging/logger";
 import { YouiEvents } from '../youi-events';
 import { GeneratorFilter } from '../filter';
 
+const express = require('express');
+const http = require('http');
+
+const port = (process.env.PORT ? Number.parseInt(process.env.PORT) : 8081);
+const app = express();
+const httpServer = http.createServer(app);
+
 class YeomanUIWebSocketServer {
   private rpc: RpcExtensionWebSockets | undefined;
   private yeomanui: YeomanUI | undefined;
@@ -18,8 +25,7 @@ class YeomanUIWebSocketServer {
 
   init() {
     // web socket server
-    const port = (process.env.PORT ? Number.parseInt(process.env.PORT) : 8081);
-    const wss = new WebSocket.Server({ port: port }, () => {
+    const wss = new WebSocket.Server({ 'server': httpServer }, () => {
       console.log('started websocket server');
     });
     wss.on('listening', () => {
@@ -46,3 +52,4 @@ class YeomanUIWebSocketServer {
 
 const wsServer = new YeomanUIWebSocketServer();
 wsServer.init();
+httpServer.listen(port);
