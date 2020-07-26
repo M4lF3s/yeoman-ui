@@ -136,7 +136,7 @@
 		"ws:run": "node ./out/src/webSocketServer/index.js",
 		"ws:egRun": "node ./out/src/webSocketServer/exploreGensIndex.js",
 		"lint": "tslint '*/*.{ts,tsx}' -c ./tslint.yml",
-		"build": "npm run webpack-prod",
+		"build": "npm run backend",
 		"start": "npm run ws:run"
 	},
 	"dependencies": {
