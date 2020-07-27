@@ -9,6 +9,7 @@ import { IChildLogger } from "@vscode-logging/logger";
 import { YouiEvents } from '../youi-events';
 import { GeneratorFilter } from '../filter';
 
+/*
 const express = require('express');
 const http = require('http');
 
@@ -34,7 +35,7 @@ wss.on("connection", function(ws) {
     console.log("websocket connection close");
     clearInterval(id);
   });
-});
+});*/
 
 class YeomanUIWebSocketServer {
   private rpc: RpcExtensionWebSockets | undefined;
@@ -45,7 +46,7 @@ class YeomanUIWebSocketServer {
 
   init() {
     // web socket server
-    //const wss = new WebSocket.Server({ 'server': httpServer }, () => {
+    const port = (process.env.PORT ? Number.parseInt(process.env.PORT) : 8081);
     const wss = new WebSocket.Server({ port: port }, () => {
       console.log('started websocket server');
     });
@@ -71,6 +72,5 @@ class YeomanUIWebSocketServer {
   }
 }
 
-//const wsServer = new YeomanUIWebSocketServer();
-//wsServer.init();
-//httpServer.listen(port);
+const wsServer = new YeomanUIWebSocketServer();
+wsServer.init();
