@@ -16,6 +16,26 @@ const port = (process.env.PORT ? Number.parseInt(process.env.PORT) : 8081);
 const app = express();
 const httpServer = http.createServer(app);
 
+httpServer.listen(port);
+
+console.log("http server listening on %d", port);
+
+const wss = new WebSocket.Server({server: httpServer});
+console.log("websocket server created");
+
+wss.on("connection", function(ws) {
+  var id = setInterval(function() {
+    ws.send(JSON.stringify(new Date()), function() {  });
+  }, 1000);
+
+  console.log("websocket connection open");
+
+  ws.on("close", function() {
+    console.log("websocket connection close");
+    clearInterval(id);
+  });
+});
+
 class YeomanUIWebSocketServer {
   private rpc: RpcExtensionWebSockets | undefined;
   private yeomanui: YeomanUI | undefined;
@@ -25,7 +45,8 @@ class YeomanUIWebSocketServer {
 
   init() {
     // web socket server
-    const wss = new WebSocket.Server({ 'server': httpServer }, () => {
+    //const wss = new WebSocket.Server({ 'server': httpServer }, () => {
+    const wss = new WebSocket.Server({ port: port }, () => {
       console.log('started websocket server');
     });
     wss.on('listening', () => {
@@ -50,6 +71,6 @@ class YeomanUIWebSocketServer {
   }
 }
 
-const wsServer = new YeomanUIWebSocketServer();
-wsServer.init();
-httpServer.listen(port);
+//const wsServer = new YeomanUIWebSocketServer();
+//wsServer.init();
+//httpServer.listen(port);
